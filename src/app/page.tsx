@@ -2,6 +2,7 @@ import { HeroSection } from "@/components/landing/HeroSection";
 import { PulseNetwork } from "@/components/landing/PulseNetwork";
 import { NetworkSection } from "@/components/landing/NetworkSection";
 import { PreviewTool } from "@/components/landing/PreviewTool";
+import { ProcessSection } from "@/components/landing/ProcessSection";
 
 export default function Home() {
   return (
@@ -30,6 +31,8 @@ export default function Home() {
       </div>
 
       <NetworkSection />
+
+      <ProcessSection />
 
       <PreviewTool />
 
