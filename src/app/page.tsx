@@ -35,7 +35,7 @@ export default function Home() {
 
       <footer className="py-12 border-t border-[var(--card-border)] mt-20">
         <div className="max-w-6xl mx-auto px-6 text-center text-slate-500 text-sm">
-          <p>© 2026 Loom OOH. All rights reserved. Weaver of the Digital Fabric.</p>
+          <p>© 2026 Loom OOH - Built for the Indian Retail Fabric</p>
         </div>
       </footer>
 
