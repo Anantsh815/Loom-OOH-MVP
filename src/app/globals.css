@@ -72,11 +72,34 @@ body {
 }
 
 .leaflet-container a.leaflet-popup-close-button {
-  color: #666 !important;
+  color: #00FFFF !important;
+  /* Cyan close button too */
   font-size: 18px !important;
   padding: 4px !important;
 }
 
 .leaflet-container a.leaflet-popup-close-button:hover {
   color: #fff !important;
+}
+
+/* Zoom Control Customization */
+.leaflet-control-zoom a {
+  background-color: #000000 !important;
+  color: #00FFFF !important;
+  border: 1px solid #00FFFF !important;
+  border-radius: 4px !important;
+  /* Or circle if preferred, usually boxy */
+  margin-bottom: 4px !important;
+  box-shadow: 0 0 5px rgba(0, 255, 255, 0.3) !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background-color: #00FFFF !important;
+  color: #000000 !important;
+  box-shadow: 0 0 10px #00FFFF !important;
+}
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  /* Specific overrides if needed, but the 'a' selector covers both usually */
 }
