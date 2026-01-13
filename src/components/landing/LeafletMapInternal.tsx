@@ -1,6 +1,6 @@
 "use client";
 
-import { MapContainer, TileLayer, Marker, Popup, useMap, ZoomControl } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap, ZoomControl, Tooltip } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useState, useEffect } from "react";
@@ -66,9 +66,9 @@ function CityFocusControl() {
     };
 
     return (
-        <div className="absolute top-1/2 left-4 z-[1000] -translate-y-1/2 flex flex-col gap-3">
+        <div className="absolute top-1/2 left-4 z-[9999] -translate-y-1/2 flex flex-col gap-3">
             <div className="glass-panel p-3 rounded-xl border border-[#00FFFF] shadow-[0_0_15px_rgba(0,255,255,0.2)] flex flex-col gap-2">
-                <h3 className="text-[#00FFFF] text-xs font-bold uppercase tracking-widest mb-1 text-center">
+                <h3 className="text-[#00FFFF] text-xs font-bold uppercase tracking-widest mb-1 text-center" style={{ textShadow: '0 0 5px rgba(0,0,0,0.8)' }}>
                     Quick Focus
                 </h3>
                 {Object.entries(CITY_COORDS).map(([city, coords]) => (
@@ -130,12 +130,15 @@ export default function LeafletMapInternal() {
                                 }
                             }}
                         >
+                            <Tooltip permanent direction="bottom" className="custom-tooltip">
+                                {node.area}
+                            </Tooltip>
                             <Popup className="custom-leaflet-popup">
                                 <div className="p-2 min-w-[200px] text-left">
-                                    <h4 className="font-bold text-sm text-black mb-1 font-[family-name:var(--font-space-grotesk)]">
-                                        {node.area} <span className="text-slate-400 font-normal">|</span> Daily Reach: {node.reach}
+                                    <h4 className="font-bold text-sm text-white mb-1 font-[family-name:var(--font-space-grotesk)]" style={{ textShadow: '0 0 5px rgba(0,0,0,0.8)' }}>
+                                        {node.area} <span className="text-slate-400 font-normal">|</span> <span className="text-[#00FFFF]">Daily Reach: {node.reach}</span>
                                     </h4>
-                                    <div className="text-xs text-slate-500 mb-2 font-medium">{node.category}</div>
+                                    <div className="text-xs text-slate-300 mb-2 font-medium">{node.category}</div>
                                     <div className="flex items-center gap-2 mb-3">
                                         <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
                                         <span className="text-xs text-green-600 font-bold tracking-wide uppercase">Live Now</span>
@@ -154,7 +157,7 @@ export default function LeafletMapInternal() {
             </MapContainer>
 
             {/* Filter Overlay */}
-            <div className="absolute top-4 right-4 z-[1000] flex gap-2 flex-wrap justify-end">
+            <div className="absolute top-4 right-4 z-[9999] flex gap-2 flex-wrap justify-end">
                 {CATEGORIES.map((cat) => (
                     <button
                         key={cat}

@@ -99,7 +99,16 @@ body {
   box-shadow: 0 0 10px #00FFFF !important;
 }
 
-.leaflet-control-zoom-in,
-.leaflet-control-zoom-out {
-  /* Specific overrides if needed, but the 'a' selector covers both usually */
+/* Tooltip Customization (Permanent Labels) */
+.leaflet-tooltip.custom-tooltip {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #FFFFFF !important;
+  font-weight: bold;
+  font-size: 14px;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8), 0 0 2px black;
+  /* Double shadow for readability */
+  margin-top: 15px !important;
+  /* Adjust spacing from marker */
 }
