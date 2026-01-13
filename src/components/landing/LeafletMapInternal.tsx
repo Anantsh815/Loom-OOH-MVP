@@ -1,9 +1,9 @@
 "use client";
 
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Fix for default marker icons in Next.js/Leaflet if we were using default icons,
 // but we are using custom DivIcons so it might not be strictly necessary, 
@@ -29,7 +29,7 @@ const GURGAON_NODES = Array.from({ length: 10 }).map((_, i) => ({
     reach: "65,000+ daily"
 }));
 
-const ALL_NODES = [...BANGALORE_NODES, ...GURGAON_NODES];
+const loomNodes = [...BANGALORE_NODES, ...GURGAON_NODES];
 
 // Creating a custom pulsing icon using L.divIcon
 const createPulseIcon = () => {
@@ -43,9 +43,22 @@ const createPulseIcon = () => {
         `,
         iconSize: [32, 32],
         iconAnchor: [16, 16], // Center the icon
-        popupAnchor: [0, -16]
+        popupAnchor: [0, -10]
     });
 };
+
+function MapController() {
+    const map = useMap();
+
+    useEffect(() => {
+        if (loomNodes.length > 0) {
+            const bounds = L.latLngBounds(loomNodes.map(n => [n.lat, n.lng]));
+            map.fitBounds(bounds, { padding: [50, 50] });
+        }
+    }, [map]);
+
+    return null;
+}
 
 export default function LeafletMapInternal() {
     return (
@@ -54,31 +67,36 @@ export default function LeafletMapInternal() {
             zoom={5}
             scrollWheelZoom={false}
             className="w-full h-full bg-[#050a14]"
-            attributionControl={false} // Clean look, adding custom attribution if needed or keep standard
+            attributionControl={false}
         >
-            {/* Custom Attribution defined in requirements but MapContainer has an attributionControl prop default true. 
-                 To use custom position or style, we can disable and add our own, 
-                 or just let TileLayer handle it via the attribution prop.
-             */}
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                 url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
             />
 
-            {ALL_NODES.map((node) => (
+            <MapController />
+
+            {loomNodes.map((node) => (
                 <Marker
                     key={node.id}
                     position={[node.lat, node.lng]}
                     icon={createPulseIcon()}
                 >
                     <Popup className="custom-leaflet-popup">
-                        <div className="p-1 min-w-[150px]">
-                            <h4 className="font-bold text-sm text-black mb-1">{node.location}</h4>
-                            <div className="text-xs text-slate-600 font-medium">{node.city}</div>
-                            <div className="text-xs text-slate-600">Reach: {node.reach}</div>
-                            <div className="text-xs text-green-600 font-bold mt-1 tracking-wide flex items-center gap-1">
-                                <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span> ACTIVE
+                        <div className="p-2 min-w-[200px] text-left">
+                            <h4 className="font-bold text-sm text-black mb-1 font-[family-name:var(--font-space-grotesk)]">
+                                {node.location} <span className="text-slate-400 font-normal">|</span> {node.reach}
+                            </h4>
+                            <div className="flex items-center gap-2 mb-3">
+                                <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                                <span className="text-xs text-green-600 font-bold tracking-wide uppercase">Live Now</span>
                             </div>
+                            <button
+                                className="w-full py-1.5 bg-black text-white text-xs font-bold uppercase tracking-wider rounded hover:bg-[var(--primary)] hover:text-black transition-colors"
+                                onClick={() => alert(`Reserving ${node.location}...`)}
+                            >
+                                Reserve This Spot
+                            </button>
                         </div>
                     </Popup>
                 </Marker>
