@@ -1,14 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #020408; /* Deep void black */
+  --background: #020408;
+  /* Deep void black */
   --foreground: #e2e8f0;
 
   /* Pulse Accents */
-  --primary: #00f0ff; /* Cyan Neon */
-  --secondary: #7000ff; /* Electric Purple */
-  --accent: #ff0055; /* Magenta */
-  
+  --primary: #00f0ff;
+  /* Cyan Neon */
+  --secondary: #7000ff;
+  /* Electric Purple */
+  --accent: #ff0055;
+  /* Magenta */
+
   --card: rgba(255, 255, 255, 0.03);
   --card-border: rgba(255, 255, 255, 0.08);
 }
@@ -39,13 +43,40 @@ body {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: #020408;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #1e293b;
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #334155;
+}
+
+/* Leaflet Popup Overrides */
+.leaflet-popup-content-wrapper {
+  background: rgba(10, 10, 10, 0.95) !important;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px !important;
+  color: #fff !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+.leaflet-popup-tip {
+  background: rgba(10, 10, 10, 0.95) !important;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  color: #666 !important;
+  font-size: 18px !important;
+  padding: 4px !important;
+}
+
+.leaflet-container a.leaflet-popup-close-button:hover {
+  color: #fff !important;
 }
