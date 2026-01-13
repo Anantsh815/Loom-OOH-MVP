@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+:root {
+  --background: #020408; /* Deep void black */
+  --foreground: #e2e8f0;
+
+  /* Pulse Accents */
+  --primary: #00f0ff; /* Cyan Neon */
+  --secondary: #7000ff; /* Electric Purple */
+  --accent: #ff0055; /* Magenta */
+  
+  --card: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.08);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-outfit), sans-serif;
+  overflow-x: hidden;
+}
+
+/* Utilities for the "Phygital" feel */
+.glass-panel {
+  background: var(--card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+}
+
+.glow-text {
+  text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+}
+
+.glow-box {
+  box-shadow: 0 0 40px -10px rgba(112, 0, 255, 0.3);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #020408;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
