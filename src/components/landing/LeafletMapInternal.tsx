@@ -1,6 +1,6 @@
 "use client";
 
-import { MapContainer, TileLayer, Marker, Popup, useMap, ZoomControl, Tooltip } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap, ZoomControl } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useState, useEffect } from "react";
@@ -39,7 +39,9 @@ const createPulseIcon = (isDimmed: boolean) => {
         `,
         iconSize: [32, 32],
         iconAnchor: [16, 16], // Center the icon
-        popupAnchor: [0, -10]
+        popupAnchor: [0, -10],
+        shadowUrl: undefined, // No shadow
+        shadowSize: undefined
     });
 };
 
@@ -130,9 +132,6 @@ export default function LeafletMapInternal() {
                                 }
                             }}
                         >
-                            <Tooltip permanent direction="bottom" className="custom-tooltip">
-                                {node.area}
-                            </Tooltip>
                             <Popup className="custom-leaflet-popup">
                                 <div className="p-2 min-w-[200px] text-left">
                                     <h4 className="font-bold text-sm text-white mb-1 font-[family-name:var(--font-space-grotesk)]" style={{ textShadow: '0 0 5px rgba(0,0,0,0.8)' }}>
