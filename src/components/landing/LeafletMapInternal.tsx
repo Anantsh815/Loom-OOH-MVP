@@ -27,8 +27,8 @@ const createPulseIcon = (isDimmed: boolean) => {
         className: "custom-div-icon",
         html: `
             <div class="relative flex items-center justify-center w-8 h-8 ${isDimmed ? 'opacity-20 grayscale' : ''}">
-                <div class="absolute w-full h-full bg-[#FF00FF] rounded-full opacity-20 ${!isDimmed ? 'animate-ping' : ''}"></div>
-                <div class="relative w-3 h-3 bg-[#FF00FF] rounded-full shadow-[0_0_10px_#FF00FF] hover:bg-white hover:scale-125 transition-all duration-300"></div>
+                <div class="absolute w-full h-full bg-[#00FFFF] rounded-full opacity-40 ${!isDimmed ? 'animate-ping' : ''}"></div>
+                <div class="relative w-3 h-3 bg-[#00FFFF] rounded-full shadow-[0_0_10px_#00FFFF] hover:bg-white hover:scale-125 transition-all duration-300"></div>
             </div>
         `,
         iconSize: [32, 32],
@@ -97,7 +97,7 @@ export default function LeafletMapInternal() {
                                         <span className="text-xs text-green-600 font-bold tracking-wide uppercase">Live Now</span>
                                     </div>
                                     <button
-                                        className="w-full py-1.5 bg-black text-white text-xs font-bold uppercase tracking-wider rounded hover:bg-[#FF00FF] hover:text-white transition-colors"
+                                        className="w-full py-1.5 bg-black text-white text-xs font-bold uppercase tracking-wider rounded hover:bg-[#00FFFF] hover:text-black transition-colors"
                                         onClick={() => console.log(`Reserving ${node.area}...`)}
                                     >
                                         Reserve This Spot
@@ -118,8 +118,8 @@ export default function LeafletMapInternal() {
                         className={`
                             px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 backdrop-blur-md border
                             ${activeCategory === cat
-                                ? "bg-[#FF00FF] text-white border-[#FF00FF] shadow-[0_0_15px_#FF00FF]"
-                                : "bg-black/60 text-slate-300 border-white/10 hover:border-[#FF00FF] hover:text-white"
+                                ? "bg-[#00FFFF] text-black border-[#00FFFF] shadow-[0_0_15px_#00FFFF]"
+                                : "bg-black/60 text-slate-300 border-white/10 hover:border-[#00FFFF] hover:text-white"
                             }
                         `}
                     >
