@@ -58,7 +58,10 @@ export default function LeafletMapInternal() {
             <MapContainer
                 center={[20.5937, 78.9629]}
                 zoom={5}
-                scrollWheelZoom={false}
+                scrollWheelZoom={true}
+                doubleClickZoom={true}
+                zoomSnap={0.5}
+                zoomDelta={0.5}
                 zoomControl={false}
                 className="w-full h-full bg-[#050a14]"
                 attributionControl={false}
