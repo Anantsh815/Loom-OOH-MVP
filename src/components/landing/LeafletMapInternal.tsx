@@ -12,27 +12,14 @@ import { useState, useEffect } from "react";
 
 const CATEGORIES = ["High-Street Retail", "Tech Parks", "Transit Hubs"];
 
-const BANGALORE_NODES = Array.from({ length: 10 }).map((_, i) => ({
-    id: `blr-${i}`,
-    lat: 12.9784 + (Math.random() - 0.5) * 0.05,
-    lng: 77.6408 + (Math.random() - 0.5) * 0.05,
-    city: "Bangalore",
-    location: "Indiranagar",
-    reach: "50,000+ daily",
-    category: CATEGORIES[i % 3] // Distribute categories
-}));
-
-const GURGAON_NODES = Array.from({ length: 10 }).map((_, i) => ({
-    id: `ggn-${i}`,
-    lat: 28.4949 + (Math.random() - 0.5) * 0.05,
-    lng: 77.0895 + (Math.random() - 0.5) * 0.05,
-    city: "Gurgaon",
-    location: "Cyber City",
-    reach: "65,000+ daily",
-    category: CATEGORIES[(i + 1) % 3]
-}));
-
-const loomNodes = [...BANGALORE_NODES, ...GURGAON_NODES];
+const loomNodes = [
+    { id: 1, city: 'Bangalore', area: 'Indiranagar', coords: [12.9719, 77.6412], reach: '85k', category: 'High-Street Retail' },
+    { id: 2, city: 'Bangalore', area: 'Koramangala', coords: [12.9352, 77.6245], reach: '70k', category: 'High-Street Retail' },
+    { id: 3, city: 'Mumbai', area: 'Bandra-Kurla Complex', coords: [19.0607, 72.8644], reach: '120k', category: 'Tech Parks' },
+    { id: 4, city: 'Mumbai', area: 'Marine Drive', coords: [18.9431, 72.8230], reach: '95k', category: 'Transit Hubs' },
+    { id: 5, city: 'Delhi', area: 'Cyber City (Gurgaon)', coords: [28.4950, 77.0878], reach: '150k', category: 'Tech Parks' },
+    { id: 6, city: 'Delhi', area: 'Connaught Place', coords: [28.6315, 77.2167], reach: '110k', category: 'High-Street Retail' }
+];
 
 // Creating a custom pulsing icon using L.divIcon
 const createPulseIcon = (isDimmed: boolean) => {
@@ -55,7 +42,7 @@ function MapController() {
 
     useEffect(() => {
         if (loomNodes.length > 0) {
-            const bounds = L.latLngBounds(loomNodes.map(n => [n.lat, n.lng]));
+            const bounds = L.latLngBounds(loomNodes.map(n => n.coords as [number, number]));
             map.fitBounds(bounds, { padding: [50, 50] });
         }
     }, [map]);
@@ -88,7 +75,7 @@ export default function LeafletMapInternal() {
                     return (
                         <Marker
                             key={node.id}
-                            position={[node.lat, node.lng]}
+                            position={node.coords as [number, number]}
                             icon={createPulseIcon(isDimmed)}
                             opacity={isDimmed ? 0.5 : 1}
                             eventHandlers={{
@@ -102,7 +89,7 @@ export default function LeafletMapInternal() {
                             <Popup className="custom-leaflet-popup">
                                 <div className="p-2 min-w-[200px] text-left">
                                     <h4 className="font-bold text-sm text-black mb-1 font-[family-name:var(--font-space-grotesk)]">
-                                        {node.location} <span className="text-slate-400 font-normal">|</span> {node.reach}
+                                        {node.area} <span className="text-slate-400 font-normal">|</span> {node.reach}
                                     </h4>
                                     <div className="text-xs text-slate-500 mb-2 font-medium">{node.category}</div>
                                     <div className="flex items-center gap-2 mb-3">
@@ -111,7 +98,7 @@ export default function LeafletMapInternal() {
                                     </div>
                                     <button
                                         className="w-full py-1.5 bg-black text-white text-xs font-bold uppercase tracking-wider rounded hover:bg-[var(--primary)] hover:text-black transition-colors"
-                                        onClick={() => alert(`Reserving ${node.location}...`)}
+                                        onClick={() => alert(`Reserving ${node.area}...`)}
                                     >
                                         Reserve This Spot
                                     </button>
