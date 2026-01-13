@@ -12,6 +12,12 @@ import { useState, useEffect } from "react";
 
 const CATEGORIES = ["All", "High-Street Retail", "Tech Parks", "Transit Hubs"];
 
+const CITY_COORDS = {
+    Bangalore: [12.9716, 77.5946],
+    Mumbai: [19.0760, 72.8777],
+    Delhi: [28.7041, 77.1025]
+};
+
 const loomNodes = [
     { id: 1, city: 'Bangalore', area: 'Indiranagar', coords: [12.9719, 77.6412], reach: '85k', category: 'High-Street Retail' },
     { id: 2, city: 'Bangalore', area: 'Koramangala', coords: [12.9352, 77.6245], reach: '70k', category: 'High-Street Retail' },
@@ -50,6 +56,38 @@ function MapController() {
     return null;
 }
 
+function CityFocusControl() {
+    const map = useMap();
+
+    const handleFocus = (coords: number[]) => {
+        map.flyTo(coords as L.LatLngExpression, 12, {
+            duration: 2 // 2 seconds smooth animation
+        });
+    };
+
+    return (
+        <div className="absolute top-1/2 left-4 z-[1000] -translate-y-1/2 flex flex-col gap-3">
+            <div className="glass-panel p-3 rounded-xl border border-[#00FFFF] shadow-[0_0_15px_rgba(0,255,255,0.2)] flex flex-col gap-2">
+                <h3 className="text-[#00FFFF] text-xs font-bold uppercase tracking-widest mb-1 text-center">
+                    Quick Focus
+                </h3>
+                {Object.entries(CITY_COORDS).map(([city, coords]) => (
+                    <button
+                        key={city}
+                        onClick={(e) => {
+                            e.stopPropagation(); // Prevent map click
+                            handleFocus(coords);
+                        }}
+                        className="px-4 py-2 text-xs font-bold uppercase tracking-wide text-white hover:text-black hover:bg-[#00FFFF] border border-white/10 hover:border-[#00FFFF] rounded transition-all duration-300"
+                    >
+                        {city}
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
+}
+
 export default function LeafletMapInternal() {
     const [activeCategory, setActiveCategory] = useState<string>('All');
 
@@ -73,6 +111,7 @@ export default function LeafletMapInternal() {
                 />
 
                 <MapController />
+                <CityFocusControl />
 
                 {loomNodes.map((node) => {
                     const isDimmed = activeCategory !== 'All' && node.category !== activeCategory;
