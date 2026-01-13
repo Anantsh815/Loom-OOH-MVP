@@ -18,28 +18,55 @@ const CITY_COORDS = {
     Delhi: [28.7041, 77.1025]
 };
 
-const loomNodes = [
-    { id: 1, city: 'Bangalore', area: 'Indiranagar', coords: [12.9719, 77.6412], reach: '85k', category: 'High-Street Retail' },
-    { id: 2, city: 'Bangalore', area: 'Koramangala', coords: [12.9352, 77.6245], reach: '70k', category: 'High-Street Retail' },
-    { id: 3, city: 'Mumbai', area: 'Bandra-Kurla Complex', coords: [19.0607, 72.8644], reach: '120k', category: 'Tech Parks' },
-    { id: 4, city: 'Mumbai', area: 'Marine Drive', coords: [18.9431, 72.8230], reach: '95k', category: 'Transit Hubs' },
-    { id: 5, city: 'Delhi', area: 'Cyber City (Gurgaon)', coords: [28.4950, 77.0878], reach: '150k', category: 'Tech Parks' },
-    { id: 6, city: 'Delhi', area: 'Connaught Place', coords: [28.6315, 77.2167], reach: '110k', category: 'High-Street Retail' }
+const METRO_CLUSTERS = [
+    { name: 'Mumbai', latMin: 18.9, latMax: 19.2, lngMin: 72.8, lngMax: 73.0 },
+    { name: 'Delhi', latMin: 28.4, latMax: 28.7, lngMin: 77.0, lngMax: 77.3 },
+    { name: 'Bangalore', latMin: 12.8, latMax: 13.1, lngMin: 77.5, lngMax: 77.7 },
+    { name: 'Hyderabad', latMin: 17.3, latMax: 17.5, lngMin: 78.3, lngMax: 78.5 },
+    { name: 'Chennai', latMin: 12.9, latMax: 13.1, lngMin: 80.1, lngMax: 80.3 },
+    { name: 'Kolkata', latMin: 22.4, latMax: 22.6, lngMin: 88.3, lngMax: 88.5 }
 ];
+
+const generateMetroNodes = () => {
+    const nodes: any[] = [];
+    let idCounter = 1;
+    const TOTAL_NODES = 100;
+    const NODES_PER_CLUSTER = Math.floor(TOTAL_NODES / METRO_CLUSTERS.length);
+
+    METRO_CLUSTERS.forEach(cluster => {
+        for (let i = 0; i < NODES_PER_CLUSTER; i++) {
+            const lat = cluster.latMin + Math.random() * (cluster.latMax - cluster.latMin);
+            const lng = cluster.lngMin + Math.random() * (cluster.lngMax - cluster.lngMin);
+            const category = CATEGORIES[1 + Math.floor(Math.random() * (CATEGORIES.length - 1))]; // Random category excluding 'All'
+
+            nodes.push({
+                id: idCounter++,
+                city: cluster.name,
+                area: `${cluster.name} Node #${i + 1}`,
+                coords: [lat, lng],
+                reach: `${(Math.floor(Math.random() * 50) + 10)}k`, // 10k - 60k
+                category: category
+            });
+        }
+    });
+    return nodes;
+};
+
+const loomNodes = generateMetroNodes();
 
 // Creating a custom pulsing icon using L.divIcon
 const createPulseIcon = (isDimmed: boolean) => {
     return L.divIcon({
         className: "custom-div-icon",
         html: `
-            <div class="relative flex items-center justify-center w-8 h-8 ${isDimmed ? 'opacity-20 grayscale' : ''}">
+            <div class="relative flex items-center justify-center w-4 h-4 ${isDimmed ? 'opacity-20 grayscale' : ''}">
                 <div class="absolute w-full h-full bg-[#00FFFF] rounded-full opacity-40 ${!isDimmed ? 'animate-ping' : ''}"></div>
-                <div class="relative w-3 h-3 bg-[#00FFFF] rounded-full shadow-[0_0_10px_#00FFFF] hover:bg-white hover:scale-125 transition-all duration-300"></div>
+                <div class="relative w-2 h-2 bg-[#00FFFF] rounded-full shadow-[0_0_10px_#00FFFF] hover:bg-white hover:scale-125 transition-all duration-300"></div>
             </div>
         `,
-        iconSize: [32, 32],
-        iconAnchor: [16, 16], // Center the icon
-        popupAnchor: [0, -10],
+        iconSize: [16, 16],
+        iconAnchor: [8, 8], // Center the icon
+        popupAnchor: [0, -6],
         shadowUrl: undefined, // No shadow
         shadowSize: undefined
     });
