@@ -5,6 +5,8 @@ import { PreviewTool } from "@/components/landing/PreviewTool";
 import { ProcessSection } from "@/components/landing/ProcessSection";
 import { PricingSection } from "@/components/landing/PricingSection";
 
+import Image from "next/image";
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-[var(--background)] overflow-x-hidden selection:bg-[var(--primary)] selection:text-black">
@@ -12,8 +14,14 @@ export default function Home() {
       {/* Navigation (Simple Overlay) */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-[var(--background)]/50 backdrop-blur-md border-b border-[var(--card-border)]">
         <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 rounded-lg bg-[var(--primary)] text-black flex items-center justify-center font-bold text-xl">L</div>
-          <span className="text-xl font-bold tracking-tight font-[family-name:var(--font-space-grotesk)]">Loom OOH</span>
+          <Image
+            src="/logo.svg"
+            alt="Loom OOH Logo"
+            width={200}
+            height={80}
+            className="h-20 w-auto object-contain"
+            priority
+          />
         </div>
         <div className="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-400">
           <a href="#" className="hover:text-white transition-colors">Platform</a>
