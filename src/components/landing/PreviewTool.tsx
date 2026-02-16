@@ -105,11 +105,11 @@ export function PreviewTool() {
               */}
                         {uploadedImage && (
                             <div
-                                className="absolute top-[17%] left-[17.5%] w-[58%] h-[35%] overflow-hidden bg-black"
+                                className="absolute top-[14%] left-[18%] w-[61%] h-[39%] overflow-hidden bg-black"
                                 style={{
-                                    transform: "rotateY(-24deg) rotateX(6deg) skewY(-8deg)", // Best guess based on typical left-angled billboard
+                                    transform: "rotateY(-6deg) rotateX(4deg) skewY(-2deg)",
                                     transformOrigin: "top left",
-                                    boxShadow: "0 0 20px rgba(0,0,0,0.5) inset"
+                                    boxShadow: "0 0 10px rgba(0,0,0,0.5) inset"
                                 }}
                             >
                                 <img src={uploadedImage} alt="Ad Content" className="w-full h-full object-cover opacity-90" />
@@ -120,9 +120,9 @@ export function PreviewTool() {
 
                         {/* Reflection/Glow if needed */}
                         {uploadedImage && (
-                            <div className="absolute top-[17%] left-[17.5%] w-[58%] h-[35%] bg-[var(--primary)] opacity-10 blur-xl pointer-events-none mix-blend-screen"
+                            <div className="absolute top-[14%] left-[18%] w-[61%] h-[39%] bg-[var(--primary)] opacity-10 blur-xl pointer-events-none mix-blend-screen"
                                 style={{
-                                    transform: "rotateY(-24deg) rotateX(6deg) skewY(-8deg)",
+                                    transform: "rotateY(-6deg) rotateX(4deg) skewY(-2deg)",
                                     transformOrigin: "top left",
                                 }}
                             ></div>

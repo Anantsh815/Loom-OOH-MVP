@@ -3,6 +3,7 @@ import { PulseNetwork } from "@/components/landing/PulseNetwork";
 import { NetworkSection } from "@/components/landing/NetworkSection";
 import { PreviewTool } from "@/components/landing/PreviewTool";
 import { ProcessSection } from "@/components/landing/ProcessSection";
+import { PricingSection } from "@/components/landing/PricingSection";
 
 export default function Home() {
   return (
@@ -33,6 +34,8 @@ export default function Home() {
       <NetworkSection />
 
       <ProcessSection />
+
+      <PricingSection />
 
       <PreviewTool />
 
