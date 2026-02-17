@@ -32,7 +32,7 @@ const steps = [
 
 export function ProcessSection() {
   return (
-    <section className="relative py-32 bg-[var(--background)] overflow-hidden">
+    <section id="process-section" className="relative py-32 bg-[var(--background)] overflow-hidden">
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
