@@ -14,9 +14,9 @@ export function AcademicAffiliation() {
             <div className="flex flex-col items-end">
                 <div className="relative h-10 w-auto">
                     <img
-                        src="https://upload.wikimedia.org/wikipedia/commons/2/2c/IIMV-Logo.svg"
+                        src="/iimvlogo.svg"
                         alt="IIM Visakhapatnam Logo"
-                        className="h-10 w-auto object-contain opacity-80"
+                        className="h-10 w-auto object-contain"
                     />
                 </div>
                 <div className="mt-1 text-right">
