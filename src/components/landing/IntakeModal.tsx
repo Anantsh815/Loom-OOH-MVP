@@ -4,10 +4,14 @@ import { useState, useActionState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { submitLead } from "@/app/actions";
+// import { submitLead } from "@/app/actions";
 import { cn } from "@/lib/utils";
 
-const initialState = {
+const initialState: {
+    success: boolean;
+    message: string;
+    errors: { [key: string]: string[] };
+} = {
     success: false,
     message: "",
     errors: {},
@@ -27,7 +31,27 @@ export function IntakeModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
     // For simplicity and animation control, we'll wrap fields in a form but prevent default on step 1.
 
     // Actually, useActionState is great for the final submit.
-    const [state, formAction, isPending] = useActionState(submitLead, initialState);
+    // const [state, formAction, isPending] = useActionState(submitLead, initialState);
+
+    // Mocking the submit action for GitHub Pages (Static Export)
+    const [isPending, setIsPending] = useState(false);
+    const [state, setState] = useState(initialState);
+
+    const mockSubmitLead = async (formData: FormData) => {
+        setIsPending(true);
+        // Simulate network delay
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        setState({
+            success: true,
+            message: "You're on the whitelist (Demo Mode). A Loom OOH strategist will WhatsApp you shortly.",
+            errors: {},
+        });
+        setIsPending(false);
+    };
+
+    const formAction = (formData: FormData) => {
+        mockSubmitLead(formData);
+    };
 
     const handleNext = () => {
         if (step === 1) {
