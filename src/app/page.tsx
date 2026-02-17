@@ -5,6 +5,7 @@ import { PreviewTool } from "@/components/landing/PreviewTool";
 import { ProcessSection } from "@/components/landing/ProcessSection";
 import { PricingSection } from "@/components/landing/PricingSection";
 import { HighIntentLeadPopup } from "@/components/landing/HighIntentLeadPopup";
+import { AcademicAffiliation } from "@/components/landing/AcademicAffiliation";
 
 import Image from "next/image";
 
@@ -48,6 +49,7 @@ export default function Home() {
 
       <PreviewTool />
       <HighIntentLeadPopup />
+      <AcademicAffiliation />
       <footer className="py-12 border-t border-[var(--card-border)] mt-20">
         <div className="max-w-6xl mx-auto px-6 text-center text-slate-500 text-sm">
           <p>© 2026 Loom OOH - Built for the Indian Retail Fabric</p>
