@@ -157,6 +157,28 @@ export function PricingSection() {
                         </div>
                     </div>
                 </motion.div>
+
+                {/* Sustainability Badge */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="mt-16 flex justify-center"
+                >
+                    <div className="inline-flex items-center gap-4 px-6 py-4 bg-green-500/5 border border-green-500/20 rounded-2xl max-w-2xl text-center">
+                        <div className="w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center shrink-0">
+                            <svg className="w-6 h-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                            </svg>
+                        </div>
+                        <div className="text-left">
+                            <h4 className="text-green-500 font-bold text-sm tracking-widest uppercase mb-1">Sustainable Ad-Tech</h4>
+                            <p className="text-slate-400 text-xs leading-relaxed">
+                                By eliminating physical vinyl printing and logistics, <span className="text-green-400 font-medium">Loom OOH reduces the carbon footprint</span> of your campaign by 90% compared to traditional boards.
+                            </p>
+                        </div>
+                    </div>
+                </motion.div>
             </div>
         </section>
     );

@@ -10,6 +10,8 @@ import { LoomAnalyticsPreview } from "@/components/landing/LoomAnalyticsPreview"
 import { ROICalculator } from "@/components/landing/ROICalculator";
 import { MarketValidation } from "@/components/landing/MarketValidation";
 import { CampaignStepper } from "@/components/landing/CampaignStepper";
+import { LoomAdvantage } from "@/components/landing/LoomAdvantage";
+import { PulseScheduling } from "@/components/landing/PulseScheduling";
 
 import Image from "next/image";
 
@@ -49,9 +51,11 @@ export default function Home() {
       <LoomAnalyticsPreview />
 
       <CampaignStepper />
+      <LoomAdvantage />
       <ProcessSection />
 
       <PricingSection />
+      <PulseScheduling />
       <ROICalculator />
 
       <MarketValidation />

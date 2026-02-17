@@ -44,8 +44,10 @@ const generateMetroNodes = () => {
                 city: cluster.name,
                 area: `${cluster.name} Node #${i + 1}`,
                 coords: [lat, lng],
-                reach: `${(Math.floor(Math.random() * 50) + 10)}k`, // 10k - 60k
-                category: category
+                reach: `${(Math.floor(Math.random() * 50) + 10)}k`,
+                category: category,
+                profile: i % 2 === 0 ? "80% Corporate Professionals" : "65% Retail Shoppers",
+                peak: i % 2 === 0 ? "08:00 AM - 11:00 AM (Transit Peak)" : "12:00 PM - 03:00 PM (Retail Peak)"
             });
         }
     });
@@ -165,9 +167,21 @@ export default function LeafletMapInternal() {
                                         {node.area} <span className="text-slate-400 font-normal">|</span> <span className="text-[#00FFFF]">Daily Reach: {node.reach}</span>
                                     </h4>
                                     <div className="text-xs text-slate-300 mb-2 font-medium">{node.category}</div>
-                                    <div className="flex items-center gap-2 mb-3">
+                                    <div className="flex items-center gap-2 mb-4">
                                         <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
                                         <span className="text-xs text-green-600 font-bold tracking-wide uppercase">Live Now</span>
+                                    </div>
+
+                                    {/* Audience Profile */}
+                                    <div className="border-t border-white/10 pt-3 mb-4 space-y-3">
+                                        <div className="space-y-1">
+                                            <div className="text-[10px] text-slate-500 uppercase font-black tracking-widest">Audience Profile</div>
+                                            <div className="text-xs text-white font-bold">{node.profile}</div>
+                                        </div>
+                                        <div className="space-y-1">
+                                            <div className="text-[10px] text-slate-500 uppercase font-black tracking-widest">Peak Hours</div>
+                                            <div className="text-[11px] text-[#00FFFF] font-bold">{node.peak}</div>
+                                        </div>
                                     </div>
                                     <button
                                         className="w-full py-1.5 bg-black text-white text-xs font-bold uppercase tracking-wider rounded hover:bg-[#00FFFF] hover:text-black transition-colors"
