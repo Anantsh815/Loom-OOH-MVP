@@ -12,14 +12,14 @@ export default function Home() {
     <main className="min-h-screen bg-[var(--background)] overflow-x-hidden selection:bg-[var(--primary)] selection:text-black">
 
       {/* Navigation (Simple Overlay) */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-[var(--background)]/50 backdrop-blur-md border-b border-[var(--card-border)]">
-        <div className="flex items-center space-x-2">
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-2 bg-[var(--background)]/50 backdrop-blur-md border-b border-[var(--card-border)]">
+        <div className="flex items-center space-x-4">
           <Image
-            src="/logo.svg"
+            src="/Logo.svg"
             alt="Loom OOH Logo"
             width={200}
             height={80}
-            className="h-20 w-auto object-contain"
+            className="h-12 w-auto object-contain"
             priority
           />
         </div>
