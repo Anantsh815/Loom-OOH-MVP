@@ -1,9 +1,10 @@
 "use client";
 
-import { MapContainer, TileLayer, Marker, Popup, useMap, ZoomControl } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap, ZoomControl, Circle } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useState, useEffect } from "react";
+import { Activity } from "lucide-react";
 
 // Fix for default marker icons in Next.js/Leaflet if we were using default icons,
 // but we are using custom DivIcons so it might not be strictly necessary, 
@@ -122,6 +123,8 @@ function CityFocusControl() {
 export default function LeafletMapInternal() {
     const [activeCategory, setActiveCategory] = useState<string>('All');
 
+    const [showHeatmap, setShowHeatmap] = useState<boolean>(false);
+
     return (
         <div className="relative w-full h-full">
             <MapContainer
@@ -143,6 +146,21 @@ export default function LeafletMapInternal() {
 
                 <MapController />
                 <CityFocusControl />
+
+                {/* Urban Density Heatmap Layer */}
+                {showHeatmap && METRO_CLUSTERS.map((cluster) => (
+                    <Circle
+                        key={`heat-${cluster.name}`}
+                        center={[(cluster.latMin + cluster.latMax) / 2, (cluster.lngMin + cluster.lngMax) / 2] as [number, number]}
+                        radius={40000}
+                        pathOptions={{
+                            fillColor: '#FF4500',
+                            fillOpacity: 0.1,
+                            color: '#FF4500',
+                            weight: 0,
+                        }}
+                    />
+                ))}
 
                 {loomNodes.map((node) => {
                     const isDimmed = activeCategory !== 'All' && node.category !== activeCategory;
@@ -197,22 +215,39 @@ export default function LeafletMapInternal() {
             </MapContainer>
 
             {/* Filter Overlay */}
-            <div className="absolute top-4 right-4 z-[9999] flex gap-2 flex-wrap justify-end">
-                {CATEGORIES.map((cat) => (
-                    <button
-                        key={cat}
-                        onClick={() => setActiveCategory(cat)}
-                        className={`
-                            px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 backdrop-blur-md border
-                            ${activeCategory === cat
-                                ? "bg-[#00FFFF] text-black border-[#00FFFF] shadow-[0_0_15px_#00FFFF]"
-                                : "bg-black/60 text-slate-300 border-white/10 hover:border-[#00FFFF] hover:text-white"
-                            }
-                        `}
-                    >
-                        {cat}
-                    </button>
-                ))}
+            <div className="absolute top-4 right-4 z-[9999] flex flex-col gap-4 items-end">
+                <div className="flex gap-2 flex-wrap justify-end">
+                    {CATEGORIES.map((cat) => (
+                        <button
+                            key={cat}
+                            onClick={() => setActiveCategory(cat)}
+                            className={`
+                                px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 backdrop-blur-md border
+                                ${activeCategory === cat
+                                    ? "bg-[#00FFFF] text-black border-[#00FFFF] shadow-[0_0_15px_#00FFFF]"
+                                    : "bg-black/60 text-slate-300 border-white/10 hover:border-[#00FFFF] hover:text-white"
+                                }
+                            `}
+                        >
+                            {cat}
+                        </button>
+                    ))}
+                </div>
+
+                {/* Heatmap Toggle */}
+                <button
+                    onClick={() => setShowHeatmap(!showHeatmap)}
+                    className={`
+                        flex items-center gap-2 px-4 py-2 rounded-none text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 backdrop-blur-md border
+                        ${showHeatmap
+                            ? "bg-orange-500 text-white border-orange-500 shadow-[0_0_15px_rgba(255,69,0,0.4)]"
+                            : "bg-black/80 text-orange-500 border-orange-500/30 hover:border-orange-500"
+                        }
+                    `}
+                >
+                    <Activity className={`w-3 h-3 ${showHeatmap ? 'animate-pulse' : ''}`} />
+                    Urban Density Heatmap: {showHeatmap ? 'ON' : 'OFF'}
+                </button>
             </div>
         </div>
     );

@@ -12,6 +12,8 @@ import { MarketValidation } from "@/components/landing/MarketValidation";
 import { CampaignStepper } from "@/components/landing/CampaignStepper";
 import { LoomAdvantage } from "@/components/landing/LoomAdvantage";
 import { PulseScheduling } from "@/components/landing/PulseScheduling";
+import { ProofOfPlayLog } from "@/components/landing/ProofOfPlayLog";
+import { QuickLaunchWizard } from "@/components/landing/QuickLaunchWizard";
 
 import Image from "next/image";
 
@@ -47,20 +49,42 @@ export default function Home() {
         <PulseNetwork />
       </div>
 
+      {/* Network + Analytics Intelligence Layer */}
       <NetworkSection />
       <LoomAnalyticsPreview />
 
+      {/* Proof of Play — Live Verification Log (Transparency) */}
+      <section className="py-16 bg-[#050a14] border-y border-white/5">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center lg:items-start gap-12">
+          <div className="flex-1 space-y-4">
+            <h2 className="text-3xl md:text-4xl font-black text-white font-[family-name:var(--font-space-grotesk)] tracking-tighter uppercase">
+              Proof of <span className="text-[#00FFFF]">Play</span> Protocol
+            </h2>
+            <p className="text-slate-400 max-w-lg">
+              Every single ad playback is cryptographically logged and verified in real-time. No more guesswork — this is auditable, transparent OOH.
+            </p>
+          </div>
+          <ProofOfPlayLog />
+        </div>
+      </section>
+
+      {/* How It Works + Comparison */}
       <CampaignStepper />
       <LoomAdvantage />
       <ProcessSection />
 
+      {/* Pricing + Scheduling + ROI */}
       <PricingSection />
       <PulseScheduling />
       <ROICalculator />
 
-      <MarketValidation />
+      {/* Quick Launch Wizard — Service as a Product */}
+      <QuickLaunchWizard />
 
+      {/* Social Proof + DCO Simulator */}
+      <MarketValidation />
       <PreviewTool />
+
       <HighIntentLeadPopup />
       <AcademicAffiliation />
       <footer className="py-12 border-t border-[var(--card-border)] mt-20">
