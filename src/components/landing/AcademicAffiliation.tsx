@@ -20,10 +20,10 @@ export function AcademicAffiliation() {
                     />
                 </div>
                 <div className="mt-2 text-right">
-                    <p className="text-[15px] font-black text-white/60 tracking-wider uppercase">
-                        NPDC Group 22
+                    <p className="text-[13px] font-black text-white/60 tracking-wider uppercase">
+                        Group 22, NPDC
                     </p>
-                    <p className="text-[13px] text-white/50 font-medium">
+                    <p className="text-[11px] text-white/50 font-medium">
                         (Prof. Sushil Kumar)
                     </p>
                 </div>
