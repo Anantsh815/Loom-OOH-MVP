@@ -6,6 +6,10 @@ import { ProcessSection } from "@/components/landing/ProcessSection";
 import { PricingSection } from "@/components/landing/PricingSection";
 import { HighIntentLeadPopup } from "@/components/landing/HighIntentLeadPopup";
 import { AcademicAffiliation } from "@/components/landing/AcademicAffiliation";
+import { LoomAnalyticsPreview } from "@/components/landing/LoomAnalyticsPreview";
+import { ROICalculator } from "@/components/landing/ROICalculator";
+import { MarketValidation } from "@/components/landing/MarketValidation";
+import { CampaignStepper } from "@/components/landing/CampaignStepper";
 
 import Image from "next/image";
 
@@ -42,10 +46,15 @@ export default function Home() {
       </div>
 
       <NetworkSection />
+      <LoomAnalyticsPreview />
 
+      <CampaignStepper />
       <ProcessSection />
 
       <PricingSection />
+      <ROICalculator />
+
+      <MarketValidation />
 
       <PreviewTool />
       <HighIntentLeadPopup />
