@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { basePath } from "@/lib/utils";
 import { Upload, X } from "lucide-react";
 import Image from "next/image";
 import { IntakeModal } from "./IntakeModal";
@@ -92,7 +91,7 @@ export function PreviewTool() {
                     <div className="relative rounded-lg overflow-hidden shadow-2xl border border-[var(--card-border)]">
                         {/* Base Mockup */}
                         <Image
-                            src={`${basePath}/billboard-mockup.png`}
+                            src="/billboard-mockup.png"
                             alt="Billboard Mockup"
                             width={800}
                             height={600}

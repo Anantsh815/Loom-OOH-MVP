@@ -4,7 +4,7 @@ import { useState, useActionState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-// import { submitLead } from "@/app/actions";
+import { submitLead } from "@/app/actions";
 import { cn } from "@/lib/utils";
 
 const initialState: {
@@ -27,37 +27,11 @@ export function IntakeModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
     });
 
     // Use useActionState (new hook in React 19/Next 15) for form handling
-    // Note: Since we have a multi-step form, we might handle the submit manually or wrap both steps in one form.
-    // For simplicity and animation control, we'll wrap fields in a form but prevent default on step 1.
-
-    // Actually, useActionState is great for the final submit.
-    // const [state, formAction, isPending] = useActionState(submitLead, initialState);
-
-    // Mocking the submit action for GitHub Pages (Static Export)
-    const [isPending, setIsPending] = useState(false);
-    const [state, setState] = useState(initialState);
-
-    const mockSubmitLead = async (formData: FormData) => {
-        setIsPending(true);
-        // Simulate network delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        setState({
-            success: true,
-            message: "You're on the whitelist (Demo Mode). A Loom OOH strategist will WhatsApp you shortly.",
-            errors: {},
-        });
-        setIsPending(false);
-    };
-
-    const formAction = (formData: FormData) => {
-        mockSubmitLead(formData);
-    };
+    const [state, formAction, isPending] = useActionState(submitLead, initialState);
 
     const handleNext = () => {
         if (step === 1) {
             if (!formData.businessName || !formData.city) {
-                // Simple client-side validation for step 1
-                // In a real app, show errors.
                 return;
             }
             setStep(2);
@@ -128,7 +102,7 @@ export function IntakeModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                                         <div className="space-y-2">
                                             <label className="text-sm font-medium text-slate-300">Business Name</label>
                                             <input
-                                                name="businessName_visible" // Use different name to avoid server reading this directly if we duplicate
+                                                name="businessName_visible"
                                                 value={formData.businessName}
                                                 onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
                                                 className="w-full bg-[var(--card)] border border-[var(--card-border)] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[var(--primary)] transition-colors"
