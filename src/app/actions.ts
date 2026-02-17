@@ -1,11 +1,6 @@
 "use server";
 
-import { PrismaClient } from "@prisma/client";
 import { revalidatePath } from "next/cache";
-
-// Initialize Prisma Client
-// In production, this should be a singleton to prevent connection limits
-const prisma = new PrismaClient();
 
 export type FormState = {
     success?: boolean;
@@ -40,18 +35,15 @@ export async function submitLead(prevState: FormState, formData: FormData): Prom
     }
 
     try {
-        await prisma.lead.create({
-            data: {
-                businessName,
-                city,
-                whatsapp,
-                budget,
-            },
-        });
+        // Logging for manual WhatsApp tracking
+        console.log("New Lead:", { businessName, city, whatsapp, budget });
 
-        return { success: true, message: "You're on the whitelist. A Loom OOH strategist will WhatsApp you shortly." };
+        return {
+            success: true,
+            message: "You're on the whitelist! A Loom OOH strategist will WhatsApp you shortly at " + whatsapp
+        };
     } catch (error) {
-        console.error("Failed to submit lead:", error);
+        console.error("Failed to process lead:", error);
         return { success: false, message: "Something went wrong. Please try again." };
     }
 }
