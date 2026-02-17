@@ -4,6 +4,7 @@ import { NetworkSection } from "@/components/landing/NetworkSection";
 import { PreviewTool } from "@/components/landing/PreviewTool";
 import { ProcessSection } from "@/components/landing/ProcessSection";
 import { PricingSection } from "@/components/landing/PricingSection";
+import { basePath } from "@/lib/utils";
 
 import Image from "next/image";
 
@@ -15,7 +16,7 @@ export default function Home() {
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-2 bg-[var(--background)]/50 backdrop-blur-md border-b border-[var(--card-border)]">
         <div className="flex items-center space-x-4">
           <Image
-            src="/Logo.svg"
+            src={`${basePath}/Logo.svg`}
             alt="Loom OOH Logo"
             width={200}
             height={80}
